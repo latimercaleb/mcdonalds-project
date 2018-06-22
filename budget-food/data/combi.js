@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 	data.forEach(function(i){
 		parsed_item = {};
 		parsed_item[i['ITEM']] = i['PRICE'];
-		parsed_data.push(parsed_item);	
+		parsed_data.push(parsed_item);
 	});
 
 	cmb = Combinatorics.power(parsed_data);
@@ -23,7 +23,7 @@ app.get('/', function (req, res) {
 		total = 0.0;
 		items = [];
 		a.forEach(function(b){
-			total += Object.values(b).reduce(reducer);		
+			total += Object.values(b).reduce(reducer);
 			items.push(b);
 	     	});
 		if (total <= max && total != 0) {
@@ -44,4 +44,4 @@ app.get('/', function (req, res) {
 })
 
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3001, () => console.log('Example app listening on port 3001'))

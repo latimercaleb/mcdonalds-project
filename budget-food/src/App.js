@@ -17,7 +17,7 @@ class App extends Component {
       handleSubmit = (e) => {
             e.preventDefault()
              let PriceCap = this.input.value;
-            axios.get(`localhost:3120/data/combi.js${PriceCap}`)
+            axios.get(`/?${PriceCap}`)
                   .then(response  =>{
                         let data = response.data
                         this.setState({data})

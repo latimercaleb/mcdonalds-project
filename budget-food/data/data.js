@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const Combinatorics = require("js-combinatorics");
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
+var cors = require('cors');
 
-app.get('/', function (req, res) {
+app.get('/', cors(),function (req, res) {
 	console.log(req.query);
 	var max = 10;
 	var cmb, total, items;
@@ -24,12 +25,14 @@ app.get('/', function (req, res) {
 		items = [];
 		a.forEach(function(b){
 			total += Object.values(b).reduce(reducer);
-			items.push(b);
+			//console.log("What we are pushing into items ", );
+			//items.push(b);
+			items.push(Object.keys(b).toString());
 	     	});
 		if (total <= max && total != 0) {
 			entry = {};
 			entry['total'] = total.toFixed(2);
-			entry['items'] = items;
+			entry['foods'] = items;
 			results.push(entry);
 		}
 	});
@@ -40,14 +43,26 @@ app.get('/', function (req, res) {
 			console.log(err);
 		}
 	});
+//	console.log("Results returning: ", results)
 	res.send(results);
 })
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+	res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+	res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+    // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    // res.header("Access-Control-Allow-Credentials", "true");
+    // res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+    // res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		/*
+				app.use(function(req, res, next) {
+					res.header("Access-Control-Allow-Origin", "*");
+					res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+					next();
+				});
+		*/
+
+
     next();
 });
 

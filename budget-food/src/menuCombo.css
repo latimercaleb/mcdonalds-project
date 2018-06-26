@@ -1,0 +1,17 @@
+.grid {
+  background-color: azure;
+  font-size: 18px;
+  font-family: 'Roboto';
+  border: 2px groove teal;
+  margin: 5px !important;
+}
+
+.grid-item {
+  padding: 12px !important;
+  background-color: inherit;
+  font-style: italic;
+}
+
+.grid-total {
+  font-weight: bold;
+}

@@ -1,19 +1,20 @@
 import React from 'react'
-// need data here
-
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
+import './menuCombo.css'
 class MenuCombo extends React.Component{
-      constructor(props){
-            super(props)
-      }
       render(){
             return(
-                  <ul>
-                        {this.props.data.map(item => {
+                  <GridList cellHeight={100} cols={2} className='grid'>
+                        {this.props.data.map((item,idx) => {
                               return(
-                                    <li key={item.id}>{item.name}</li>
+                                    <GridListTile key={idx} className='grid-item'>
+                                      <p className='grid-total'>{item.total}</p>
+                                      {item.foods.map((foodItem,idxv) => <p key={idxv}>{foodItem}</p>)}
+                                    </GridListTile>
                               )
                         })}
-                  </ul>
+                  </GridList>
             )
       }
 }
